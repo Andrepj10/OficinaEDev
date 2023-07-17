@@ -7,5 +7,5 @@ urlpatterns = [
     
     path('imagem/', imagem, name='imagem'),
     path('imagem/', imagem, name='imagem'),
-    path('imagem/', imagem, name='imagem'),
+    
 ]
