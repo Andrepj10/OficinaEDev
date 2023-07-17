@@ -1,9 +1,9 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from agenda.views import index, imagem
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('imagem/', imagem, name='imagem'),
+    path('admin/', admin.site.urls),
+    path('', include('agenda.urls')),
 ]
