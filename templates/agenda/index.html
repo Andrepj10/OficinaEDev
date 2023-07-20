@@ -5,8 +5,7 @@
                 <section class="banner">
                     <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space">
                     <h1 class="banner__titulo"> A sua agenda ao seu dispor!</h1>
-                </section>
-               
+                </section>             
                 <section class="galeria">
                     <div class="cards">
                         <h2 class="cards__titulo">Navegue pela galeria</h2>
@@ -15,7 +14,7 @@
                             {% for fotografia in cards %}
                             <li class="card">
                                 <a href="{% url 'imagem' fotografia.id %}">
-                                    <img class="card__imagem" src="{% static '/assets/imagens/galeria/' %}{{ fotografia.foto  }}" alt="foto">
+                                    <img class="card__imagem" src="{% static '/assets/imagens/galeria/' %}{{ fotografia.foto }}" alt="foto">
                                 </a>
                                
                                 <div class="card__info">
