@@ -10,3 +10,7 @@ def index(request):
 def imagem(request, foto_id):
     fotografia = get_object_or_404(Fotografia, pk=foto_id)
     return render(request, 'agenda/imagem.html', {"fotografia": fotografia})
+
+
+def anotacoes(request):
+    return render(request, 'agenda/anotacoes.html')
