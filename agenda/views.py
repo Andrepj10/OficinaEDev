@@ -14,3 +14,15 @@ def imagem(request, foto_id):
 
 def anotacoes(request):
     return render(request, 'agenda/anotacoes.html')
+
+
+def metas(request):
+    return render(request, 'agenda/metas.html')
+
+
+def tarefas(request):
+    return render(request, 'agenda/tarefas.html')
+
+
+def eventos(request):
+    return render(request, 'agenda/eventos.html')
