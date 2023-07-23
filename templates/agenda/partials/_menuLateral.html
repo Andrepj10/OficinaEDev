@@ -3,6 +3,11 @@
 <div class="pagina-inicial">
     <header class="cabecalho">
         <img src="{% static '/assets/logo/logoOficina.png' %}" alt="No more mess" />
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            <p id="messages">{{message}}</p>
+        </div>
+        {% endfor %}
         <div class="cabecalho__busca">
             <div class="busca__fundo">
                 <form action="{% url 'buscar' %}">
@@ -25,5 +30,6 @@
                 <a href="{% url 'tarefas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Tarefas</a>
                 <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Login</a>
                 <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Cadastro</a>
+                <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
             </nav>
         </section>
