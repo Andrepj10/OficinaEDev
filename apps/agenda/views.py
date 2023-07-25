@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib import messages
 
-from agenda.models import Fotografia
+from apps.agenda.models import Fotografia
 
 #Responsavel por mostrar o conteudo das telas
 def index(request):

@@ -1,5 +1,5 @@
 from django.urls import path
-from agenda.views import index, imagem, buscar
+from apps.agenda.views import index, imagem, buscar
 from . import views
 
 urlpatterns = [

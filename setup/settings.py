@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'agenda.apps.AgendaConfig',
-    'usuarios.apps.UsuariosConfig',
+    'apps.agenda.apps.AgendaConfig',
+    'apps.usuarios.apps.UsuariosConfig',
     
 ]
 
