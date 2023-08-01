@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from apps.agenda.models import Fotografia
 from apps.agenda.forms import FotografiaForms
+from datetime import datetime
 
 #Responsavel por mostrar o conteudo das telas
 def index(request):
@@ -31,7 +32,7 @@ def buscar(request):
         if nome_a_buscar:
             fotografias = fotografias.filter(nome__icontains=nome_a_buscar)
             
-    return render (request, "agenda/buscar.html", {"cards":fotografias})
+    return render (request, "agenda/index.html", {"cards":fotografias})
 
 def anotacoes(request):
      if not request.user.is_authenticated:
@@ -110,3 +111,11 @@ def filtro(request, categoria):
     fotografias = Fotografia.objects.order_by("data_evento").filter(publicada=True, categoria=categoria)
 
     return render(request, 'agenda/index.html', {"cards": fotografias})
+
+
+def evento_andamento(request):
+    # Filtra as fotografias em andamento com base no campo "estado"
+    fotografias = Fotografia.objects.filter(estado='Em andamento', publicada=True)
+
+    # Renderiza a lista de fotografias em andamento no template eventos_andamento.html
+    return render(request, 'evento_andamento.html', {'cards': fotografias})

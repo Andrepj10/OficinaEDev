@@ -12,6 +12,10 @@ class Fotografia(models.Model):
         ("IMPORTANTE","Importante"),
         ("MUITO IMPORTANTE","Muito importante"),
     ]
+    OPCOES_ESTADO = [
+        ('Em andamento', 'Em andamento'),
+        ('Concluído', 'Concluído'),
+    ]
     
     nome = models.CharField(max_length=100, null=False, blank=False)
     legenda = models.CharField(max_length=150, null=False, blank=False)
@@ -27,5 +31,12 @@ class Fotografia(models.Model):
         blank=False,
         related_name='user'
     )
+    
+    estado = models.CharField(max_length=20, choices=OPCOES_ESTADO, default='Em andamento')
+
     def __str__(self):
         return self.nome
+    
+    
+    
+    

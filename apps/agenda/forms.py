@@ -28,3 +28,20 @@ class FotografiaForms(forms.ModelForm):
             ),
             'usuario': forms.Select(attrs={'class':'form-control'}),
         }
+        
+        
+        
+        
+class FotografiaForm(forms.ModelForm):
+    # Defina as opções para o campo "estado"
+    OPCOES_ESTADO = [
+        ('Em andamento', 'Em andamento'),
+        ('Concluído', 'Concluído'),
+    ]
+
+    # Adicione o campo "estado" ao formulário com as opções definidas
+    estado = forms.ChoiceField(choices=OPCOES_ESTADO, initial='Em andamento')
+
+    class Meta:
+        model = Fotografia
+        fields = ['nome', 'legenda', 'categoria', 'descricao', 'foto', 'data_evento', 'usuario', 'estado']

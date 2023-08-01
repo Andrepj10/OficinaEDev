@@ -1,7 +1,7 @@
 from django.urls import path
 from apps.agenda.views import index, imagem, buscar
 
-from apps.agenda.views import novo_evento, editar_evento, deletar_evento, filtro
+from apps.agenda.views import novo_evento, editar_evento, deletar_evento, filtro, evento_andamento
 
 from . import views
 
@@ -20,6 +20,8 @@ urlpatterns = [
     path('editar-evento/<int:foto_id>', editar_evento, name='editar_evento'),
     path('deletar-evento/<int:foto_id>', deletar_evento, name='deletar_evento'),
     path('filtro/<str:categoria>', filtro, name='filtro'),
+    
+    path('evento-andamento', evento_andamento, name='evento_andamento'),
 
 
     
