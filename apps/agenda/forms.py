@@ -36,11 +36,11 @@ class FotografiaForm(forms.ModelForm):
     # Defina as opções para o campo "estado"
     OPCOES_ESTADO = [
         ('Em andamento', 'Em andamento'),
-        ('Concluído', 'Concluído'),
+        ('Concluido', 'Concluido'),
     ]
 
     # Adicione o campo "estado" ao formulário com as opções definidas
-    estado = forms.ChoiceField(choices=OPCOES_ESTADO, initial='Em andamento')
+    estado = forms.ChoiceField(choices=OPCOES_ESTADO, initial='Em andamento',)
 
     class Meta:
         model = Fotografia

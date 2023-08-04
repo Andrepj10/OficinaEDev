@@ -14,7 +14,7 @@ class Fotografia(models.Model):
     ]
     OPCOES_ESTADO = [
         ('Em andamento', 'Em andamento'),
-        ('Concluído', 'Concluído'),
+        ('Concluido', 'Concluido'),
     ]
     
     nome = models.CharField(max_length=100, null=False, blank=False)
@@ -33,6 +33,7 @@ class Fotografia(models.Model):
     )
     
     estado = models.CharField(max_length=20, choices=OPCOES_ESTADO, default='Em andamento')
+    estado = models.CharField(max_length=20, choices=OPCOES_ESTADO, default='Concluido')
 
     def __str__(self):
         return self.nome

@@ -5,6 +5,7 @@ from django.contrib import messages
 from apps.agenda.models import Fotografia
 from apps.agenda.forms import FotografiaForms
 from datetime import datetime
+from django.db.models import Q
 
 #Responsavel por mostrar o conteudo das telas
 def index(request):
@@ -118,4 +119,23 @@ def evento_andamento(request):
     fotografias = Fotografia.objects.filter(estado='Em andamento', publicada=True)
 
     # Renderiza a lista de fotografias em andamento no template eventos_andamento.html
-    return render(request, 'evento_andamento.html', {'cards': fotografias})
+    return render(request, 'agenda/evento_andamento.html', {'cards': fotografias})
+
+
+
+
+def concluir_evento(request,foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)
+    fotografia.estado = 'Concluido'
+    fotografia.save()
+    messages.success(request, 'Conclusão feita com sucesso!')
+    return redirect('index')
+
+
+def evento_concluido(request):
+    # Filtra as fotografias em andamento com base no campo "estado"
+    fotografias = Fotografia.objects.filter(estado='Concluido')
+
+
+    return render(request, 'agenda/evento_concluido.html', {'cards': fotografias})
+
