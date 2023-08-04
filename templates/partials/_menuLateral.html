@@ -25,43 +25,42 @@
             <nav class="menu-lateral__navegacao">
                 <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
                 <a href="{% url 'anotacoes' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Anotações</a>
-                <!--
-                <a href="{% url 'novo_evento' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Eventos</a>
-                <a href="{% url 'evento_andamento' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">Eventos em andamento</a>
-                <a href="{% url 'evento_concluido' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">Eventos concluídos</a>
-                    !-->
                 
-                <a href="{% url 'novos_eventos' %}" id="eventos-link">
+
+
+                
+                <a href="{% url 'eventos' %}" id="eventos-link">
                     <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                     Eventos
                     <span id="seta" class="seta-cima"></span>
-                </a>
-
-                
-                     
+                </a>        
                 <div id="novo-evento" style="display: none;">
                     <a href="{% url 'novo_evento' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Criar Evento
                     </a>
-                </div>
-
-                    
+                </div>  
                 <div id="eventos-andamento" style="display: none;">
                     <a href="{% url 'evento_andamento' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Eventos em andamento
                     </a>
-                </div>
-                    
+                </div>                
                 <div id="eventos-concluido" style="display: none;">
                     <a href="{% url 'evento_concluido' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Eventos concluídos
                     </a>
                 </div>
-                    
+                
+                
                 <a href="{% url 'metas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Metas</a>
+
+
+
+
+
+
                 <a href="{% url 'tarefas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Tarefas</a>
                 <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Login</a>
                 <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Cadastro</a>
@@ -70,7 +69,10 @@
 
 
 
-            <script>
+
+
+
+            <script>//AQUI SE TRATA DAS SUBPASTAS DE EVENTOS 
                 const eventosLink = document.getElementById("eventos-link");
                 const novoEventoDiv = document.getElementById("novo-evento");
                 const eventosAndamentoDiv = document.getElementById("eventos-andamento");

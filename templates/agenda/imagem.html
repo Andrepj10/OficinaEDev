@@ -23,9 +23,13 @@
 
 
                             <div>
-                                <a href="{% url 'concluir_evento' fotografia.id %}"><button class="btn btn-success col-12" style="padding: top 5px;">Concluído</button></a>
-                                <a href="{% url 'deletar_evento' fotografia.id %}"><button class="btn btn-danger col-12" style="padding: top 5px;">Deletar</button></a>
-                                <a href="{% url 'editar_evento' fotografia.id %}"><button class="btn btn-success col-12" style="padding: top 5px;">Editar</button></a>
+                               
+                            <a href="{% url 'concluir_evento' fotografia.id %}"><button class="btn btn-success col-12" style="padding: top 5px;">Concluir</button></a>
+                           
+                            <a href="{% url 'editar_evento' fotografia.id %}"><button class="btn btn-success col-12" style="padding: 5px; background-color: #000080; color: white;">Editar</button> </a>
+                              
+
+                            <a href="{% url 'deletar_evento' fotografia.id %}"><button class="btn btn-danger col-12" style="padding: top 5px;">Deletar</button></a>
                             </div>
                             
                         </div>
