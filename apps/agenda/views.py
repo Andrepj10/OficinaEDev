@@ -66,6 +66,13 @@ def eventos(request):
     
     return render(request, 'agenda/eventos.html')
 
+def novos_eventos(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    return render(request, 'agenda/eventos.html')
+
 
 def novo_evento(request):
     if not request.user.is_authenticated:

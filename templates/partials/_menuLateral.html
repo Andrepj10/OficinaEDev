@@ -25,13 +25,71 @@
             <nav class="menu-lateral__navegacao">
                 <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
                 <a href="{% url 'anotacoes' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Anotações</a>
+                <!--
                 <a href="{% url 'novo_evento' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Eventos</a>
                 <a href="{% url 'evento_andamento' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">Eventos em andamento</a>
                 <a href="{% url 'evento_concluido' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">Eventos concluídos</a>
+                    !-->
+                
+                <a href="{% url 'novos_eventos' %}" id="eventos-link">
+                    <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                    Eventos
+                    <span id="seta" class="seta-cima"></span>
+                </a>
+
+                
+                     
+                <div id="novo-evento" style="display: none;">
+                    <a href="{% url 'novo_evento' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Criar Evento
+                    </a>
+                </div>
+
+                    
+                <div id="eventos-andamento" style="display: none;">
+                    <a href="{% url 'evento_andamento' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Eventos em andamento
+                    </a>
+                </div>
+                    
+                <div id="eventos-concluido" style="display: none;">
+                    <a href="{% url 'evento_concluido' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Eventos concluídos
+                    </a>
+                </div>
+                    
                 <a href="{% url 'metas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Metas</a>
                 <a href="{% url 'tarefas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Tarefas</a>
                 <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Login</a>
                 <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Cadastro</a>
                 <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
             </nav>
+
+
+
+            <script>
+                const eventosLink = document.getElementById("eventos-link");
+                const novoEventoDiv = document.getElementById("novo-evento");
+                const eventosAndamentoDiv = document.getElementById("eventos-andamento");
+                const eventosConcluidoDiv = document.getElementById("eventos-concluido");
+                const seta = document.getElementById("seta");
+                
+                let eventosVisible = false;
+                
+                eventosLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    novoEventoDiv.style.display = eventosVisible ? "none" : "block";
+                    eventosAndamentoDiv.style.display = eventosVisible ? "none" : "block";
+                    eventosConcluidoDiv.style.display = eventosVisible ? "none" : "block";
+                
+                    seta.classList.toggle("seta-cima", eventosVisible);
+                    eventosVisible = !eventosVisible;
+                });
+                
+            </script>
+            
         </section>
