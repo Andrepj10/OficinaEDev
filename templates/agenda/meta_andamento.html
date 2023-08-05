@@ -1,0 +1,33 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="conteudo">
+        {% for meta in cards %}
+            <section class="imagem">
+                <div class="imagem__conteudo">
+                    <!-- Aqui vem o código para exibir a informação da meta -->
+                    <p class="imagem__titulo">{{ meta.nomeMeta }}</p>
+                    <p class="imagem__descricao">Data de Início: {{ meta.data_inicio }}</p>
+                    <p class="imagem__descricao">Data de Fim: {{ meta.data_fim }}</p>
+                    <p class="imagem__descricao">Quantidade de Passos: {{ meta.quantidade_passos }}</p>
+              
+                    <div>
+                        <a href="{% url 'concluir_meta' meta.id %}">
+                            <button class="btn btn-success col-12" style="padding: 5px;">Concluir</button>
+                        </a>
+                        <a href="{% url 'editar_meta' meta.id %}">
+                            <button class="btn btn-success col-12" style="padding: 5px; background-color: #000080; color: white;">Editar</button>
+                        </a>
+                        <a href="{% url 'deletar_meta' meta.id %}">
+                            <button class="btn btn-danger col-12" style="padding: 5px;">Deletar</button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </section>
+</main>
+</div>
+{% endblock %}
+

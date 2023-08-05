@@ -33,11 +33,24 @@ class Fotografia(models.Model):
     )
     
     estado = models.CharField(max_length=20, choices=OPCOES_ESTADO, default='Em andamento')
-    estado = models.CharField(max_length=20, choices=OPCOES_ESTADO, default='Concluido')
+    
 
     def __str__(self):
         return self.nome
     
+
+class FazerMeta(models.Model):
     
+    OPCOES_MODO = [
+        ('Meta em andamento', 'Meta em andamento'),
+        ('Meta Concluida', 'Meta Concluida'),
+    ]
+    nomeMeta = models.CharField(max_length=100, null=False, blank=False)
+    data_inicio = models.DateField(null=False, blank=False)
+    data_fim = models.DateField(null=False, blank=False)
+    quantidade_passos = models.IntegerField(null=False, blank=False)
+
+    modo = models.CharField(max_length=20, choices=OPCOES_MODO, default='Meta em andamento')
     
-    
+    def __str__(self):
+        return self.nomeMeta

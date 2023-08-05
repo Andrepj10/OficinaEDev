@@ -54,7 +54,30 @@
                 </div>
                 
                 
-                <a href="{% url 'metas' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Metas</a>
+               
+                <a href="{% url 'metas' %}" id="metas-link">
+                    <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                    Metas
+                </a>        
+                <div id="nova-meta" style="display: none;">
+                    <a href="{% url 'nova_meta' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Criar meta
+                    </a>
+                </div>  
+                <div id="meta-andamento" style="display: none;">
+                    <a href="{% url 'meta_andamento' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Metas em andamento
+                    </a>
+                </div>                
+                <div id="meta-concluida" style="display: none;">
+                    <a href="{% url 'meta_concluida' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Metas concluídos
+                    </a>
+                </div>
+                
 
 
 
@@ -70,28 +93,80 @@
 
 
 
-
-
-            <script>//AQUI SE TRATA DAS SUBPASTAS DE EVENTOS 
+            <script>
                 const eventosLink = document.getElementById("eventos-link");
                 const novoEventoDiv = document.getElementById("novo-evento");
                 const eventosAndamentoDiv = document.getElementById("eventos-andamento");
                 const eventosConcluidoDiv = document.getElementById("eventos-concluido");
-                const seta = document.getElementById("seta");
+               
                 
                 let eventosVisible = false;
-                
+               
+            
                 eventosLink.addEventListener("click", function(event) {
                     event.preventDefault();
-
+            
                     novoEventoDiv.style.display = eventosVisible ? "none" : "block";
                     eventosAndamentoDiv.style.display = eventosVisible ? "none" : "block";
                     eventosConcluidoDiv.style.display = eventosVisible ? "none" : "block";
-                
-                    seta.classList.toggle("seta-cima", eventosVisible);
+            
+                  
                     eventosVisible = !eventosVisible;
+                  
                 });
-                
+
+                const metasLink = document.getElementById("metas-link");
+const novaMetaDiv = document.getElementById("nova-meta");
+const metaAndamentoDiv = document.getElementById("meta-andamento");
+const metaConcluidaDiv = document.getElementById("meta-concluida");
+
+let metasVisible = false;
+let metasAndamentoVisible = false;
+let metasConcluidaVisible = false;
+
+metasLink.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    novaMetaDiv.style.display = metasVisible ? "none" : "block";
+    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
+    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
+
+    metasVisible = !metasVisible;
+    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando o link principal é clicado
+    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando o link principal é clicado
+});
+
+// Repita o processo para os links "Metas em Andamento" e "Metas Concluídas"
+const metaAndamentoLink = document.getElementById("meta-andamento-link");
+const metaConcluidaLink = document.getElementById("meta-concluida-link");
+
+metaAndamentoLink.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    novaMetaDiv.style.display = "none";
+    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
+    metaConcluidaDiv.style.display = "none";
+
+    metasVisible = false; // Oculta "Criar Meta" quando "Metas em Andamento" é clicado
+    metasAndamentoVisible = !metasAndamentoVisible;
+    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando "Metas em Andamento" é clicado
+});
+
+metaConcluidaLink.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    novaMetaDiv.style.display = "none";
+    metaAndamentoDiv.style.display = "none";
+    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
+
+    metasVisible = false; // Oculta "Criar Meta" quando "Metas Concluídas" é clicado
+    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando "Metas Concluídas" é clicado
+    metasConcluidaVisible = !metasConcluidaVisible;
+});
+
             </script>
+            
+
+
             
         </section>

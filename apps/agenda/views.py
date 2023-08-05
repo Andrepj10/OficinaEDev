@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib import messages
 
-from apps.agenda.models import Fotografia
+from apps.agenda.models import FazerMeta, Fotografia
 from apps.agenda.forms import FotografiaForms
+from apps.agenda.forms import FazerMetaForm
+
 from datetime import datetime
 from django.db.models import Q
 
@@ -43,12 +45,6 @@ def anotacoes(request):
      return render(request, 'agenda/anotacoes.html')
 
 
-def metas(request):
-    if not request.user.is_authenticated:
-        messages.error(request, 'Usuário não logado')
-        return redirect('login')
-    
-    return render(request, 'agenda/metas.html')
 
 
 def tarefas(request):
@@ -140,3 +136,77 @@ def evento_concluido(request):
 
     return render(request, 'agenda/evento_concluido.html', {'cards': fotografias})
 
+
+
+
+def metas(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    return render(request, 'agenda/metas.html')
+
+def nova_meta(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    if request.method == 'POST':
+        form = FazerMetaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = FazerMetaForm()
+    return render(request, 'agenda/nova_meta.html', {'form': form})
+
+
+def editar_meta(request, foto_id):
+    fotografia = FazerMeta.objects.get(id=foto_id)
+    form = FazerMetaForm(instance=fotografia)
+    
+    if request.method == 'POST':
+        form = FazerMetaForm(request.POST, request.FILES, instance=fotografia)
+        if form.is_valid():
+            print(request.POST)
+            form.save()
+            messages.success(request, 'Evento editado com sucesso')
+            return redirect('index')
+    
+    return render(request, 'agenda/editar_evento.html', {'form':form, 'foto_id': foto_id})
+
+
+def meta_andamento(request):
+    # Filtra as fotografias em andamento com base no campo "estado"
+    fotografias = FazerMeta.objects.filter(modo='Meta em andamento')
+
+    # Renderiza a lista de fotografias em andamento no template eventos_andamento.html
+    return render(request, 'agenda/meta_andamento.html', {'cards': fotografias})
+
+
+
+
+def deletar_meta(request, foto_id):
+    fotografia = FazerMeta.objects.get(id=foto_id)
+    fotografia.delete()
+    messages.success(request, 'Deleção da meta feita com sucesso!')
+    return redirect('index')
+
+
+
+
+def concluir_meta(request,foto_id):
+    fotografia = FazerMeta.objects.get(id=foto_id)
+    fotografia.estado = 'Concluido'
+    fotografia.save()
+    messages.success(request, 'Conclusão feita com sucesso!')
+    return redirect('index')
+
+
+
+def meta_concluida(request):
+    # Filtra as fotografias em andamento com base no campo "estado"
+    fotografias = FazerMeta.objects.filter(estado='Concluida')
+
+
+    return render(request, 'agenda/meta_concluida.html', {'cards': fotografias})

@@ -1,6 +1,7 @@
 from django import forms
 
 from apps.agenda.models import Fotografia
+from apps.agenda.models import FazerMeta
 
 class FotografiaForms(forms.ModelForm):
     class Meta:
@@ -45,3 +46,11 @@ class FotografiaForm(forms.ModelForm):
     class Meta:
         model = Fotografia
         fields = ['nome', 'legenda', 'categoria', 'descricao', 'foto', 'data_evento', 'usuario', 'estado']
+        
+        
+        
+        
+class FazerMetaForm(forms.ModelForm):
+    class Meta:
+        model = FazerMeta
+        fields = ['nomeMeta', 'data_inicio', 'data_fim', 'quantidade_passos', 'modo']
