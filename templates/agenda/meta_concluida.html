@@ -2,32 +2,30 @@
 {% load static %}
 
 {% block content %}
+
+<style>
+    .imagem__titulo,
+    .imagem__descricao {
+        color: white; /* Define a cor do texto como branca */
+    }
+    </style>
     <section class="conteudo">
-        {% for fotografia in cards %}
+        {% for meta in cards %}
             <section class="imagem">
                 <div class="imagem__conteudo">
-                    {% if fotografia.foto == "" or fotografia.foto == null %}
-                        <img class="imagem__imagem" src="{% static '/assets/imagens/galeria/not-found.png'%}">
-                    {% else %}
-                        <img class="imagem__imagem" src="{{fotografia.foto.url}}">
-                    {% endif %}
-
-                    <div class="imagem__info">
-                        <div class="imagem__texto">
-                            <p class="imagem__titulo">{{ fotografia.nome }}</p>
-                            <p class="imagem__descricao">{{ fotografia.legenda }}</p>
-                            <p class="imagem__texto">{{ fotografia.descricao }}</p>
-                        </div>
-
-                        <div>
-                           
-                            
-                               
-                                <a href="{% url 'deletar_evento' fotografia.id %}"><button class="btn btn-danger col-12" style="padding: top 5px;">Deletar</button></a>
-                                <a href="{% url 'editar_evento' fotografia.id %}"><button class="btn btn-success col-12" style="padding: 5px; background-color: #000080; color: white;">Editar</button> </a>
-                              
-                        </div>
-
+                    <!-- Aqui vem o código para exibir a informação da meta -->
+                    <p class="imagem__titulo">{{ meta.nomeMeta }}</p>
+                    <p class="imagem__descricao">Data de Início: {{ meta.data_inicio }}</p>
+                    <p class="imagem__descricao">Data de Fim: {{ meta.data_fim }}</p>
+                    <p class="imagem__descricao">Quantidade de Passos: {{ meta.quantidade_passos }}</p>
+              
+                    <div>
+                     
+                       
+                        <a href="{% url 'deletar_meta' meta.id %}">
+                            <button class="btn btn-danger col-12" style="padding: 5px;">Deletar</button>
+                        </a>
+                        
                     </div>
                 </div>
             </section>

@@ -17,9 +17,9 @@ urlpatterns = [
     
     path('metas/', views.metas, name='metas'),
     path('nova-meta', nova_meta, name='nova_meta'),
-    path('editar-meta/<int:foto_id>', editar_meta, name='editar_meta'),
-    path('deletar-meta/<int:foto_id>', deletar_meta, name='deletar_meta'),
-    path('concluir-meta/<int:foto_id>', concluir_meta, name='concluir_meta'),
+    path('editar-meta/<int:meta_id>/', editar_meta, name='editar_meta'),
+    path('deletar-meta/<int:meta_id>', deletar_meta, name='deletar_meta'),
+    path('concluir-meta/<int:meta_id>', concluir_meta, name='concluir_meta'),
     
     path('meta-andamento', meta_andamento, name='meta_andamento'),
     path('meta-concluida', meta_concluida, name='meta_concluida'),

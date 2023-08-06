@@ -54,3 +54,5 @@ class FazerMetaForm(forms.ModelForm):
     class Meta:
         model = FazerMeta
         fields = ['nomeMeta', 'data_inicio', 'data_fim', 'quantidade_passos', 'modo']
+        
+        

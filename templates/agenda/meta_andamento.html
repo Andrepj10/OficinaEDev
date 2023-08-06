@@ -2,6 +2,13 @@
 {% load static %}
 
 {% block content %}
+
+<style>
+    .imagem__titulo,
+    .imagem__descricao {
+        color: white; /* Define a cor do texto como branca */
+    }
+    </style>
     <section class="conteudo">
         {% for meta in cards %}
             <section class="imagem">
@@ -22,6 +29,7 @@
                         <a href="{% url 'deletar_meta' meta.id %}">
                             <button class="btn btn-danger col-12" style="padding: 5px;">Deletar</button>
                         </a>
+                        
                     </div>
                 </div>
             </section>
