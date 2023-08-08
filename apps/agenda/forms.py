@@ -49,10 +49,20 @@ class FotografiaForm(forms.ModelForm):
         
         
         
+        #
+#class FazerMetaForm(forms.ModelForm):
+#    class Meta:
+#        model = FazerMeta
+#        fields = ['nomeMeta', 'data_inicio', 'data_fim', 'quantidade_passos', 'modo']
         
 class FazerMetaForm(forms.ModelForm):
     class Meta:
         model = FazerMeta
         fields = ['nomeMeta', 'data_inicio', 'data_fim', 'quantidade_passos', 'modo']
-        
-        
+        widgets = {
+            'nomeMeta': forms.TextInput(attrs={'class': 'form-control'}),
+            'data_inicio': forms.DateInput(attrs={'class': 'form-control date-picker', 'type': 'date'}),
+            'data_fim': forms.DateInput(attrs={'class': 'form-control date-picker', 'type': 'date'}),
+            'quantidade_passos': forms.NumberInput(attrs={'class': 'form-control'}),
+            'modo': forms.Select(attrs={'class': 'form-control'}),
+        }
