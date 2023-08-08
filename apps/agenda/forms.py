@@ -28,6 +28,7 @@ class FotografiaForms(forms.ModelForm):
                 }
             ),
             'usuario': forms.Select(attrs={'class':'form-control'}),
+            'estado': forms.Select(attrs={'class': 'form-control'}),  # Adicione esta linha
         }
         
         
@@ -48,13 +49,7 @@ class FotografiaForm(forms.ModelForm):
         fields = ['nome', 'legenda', 'categoria', 'descricao', 'foto', 'data_evento', 'usuario', 'estado']
         
         
-        
-        #
-#class FazerMetaForm(forms.ModelForm):
-#    class Meta:
-#        model = FazerMeta
-#        fields = ['nomeMeta', 'data_inicio', 'data_fim', 'quantidade_passos', 'modo']
-        
+     
 class FazerMetaForm(forms.ModelForm):
     class Meta:
         model = FazerMeta
