@@ -2,6 +2,7 @@ from django import forms
 
 from apps.agenda.models import Fotografia
 from apps.agenda.models import FazerMeta
+from apps.agenda.models import FazerAnotacao
 
 class FotografiaForms(forms.ModelForm):
     class Meta:
@@ -60,4 +61,17 @@ class FazerMetaForm(forms.ModelForm):
             'data_fim': forms.DateInput(attrs={'class': 'form-control date-picker', 'type': 'date'}),
             'quantidade_passos': forms.NumberInput(attrs={'class': 'form-control'}),
             'modo': forms.Select(attrs={'class': 'form-control'}),
+        }
+        
+from django import forms
+from .models import FazerAnotacao
+
+class FazerAnotacaoForm(forms.ModelForm):
+    class Meta:
+        model = FazerAnotacao
+        fields = ['nomeAnotacao', 'descricao']
+        widgets = {
+            'descricao': forms.Textarea(attrs={'class': 'form-control'}),
+            'nomeAnotacao': forms.TextInput(attrs={'class': 'form-control'}),
+           
         }

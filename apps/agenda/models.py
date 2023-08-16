@@ -45,6 +45,7 @@ class FazerMeta(models.Model):
         ('Meta em andamento', 'Meta em andamento'),
         ('Meta Concluida', 'Meta Concluida'),
     ]
+    
     nomeMeta = models.CharField(max_length=100, null=False, blank=False)
     data_inicio = models.DateField(null=False, blank=False)
     data_fim = models.DateField(null=False, blank=False)
@@ -55,3 +56,13 @@ class FazerMeta(models.Model):
     def __str__(self):
         return self.nomeMeta
     
+    
+    
+class FazerAnotacao(models.Model):
+    
+    nomeAnotacao = models.CharField(max_length=1000)
+    descricao = models.TextField()  # Adicionando o campo descrição
+    
+
+    def __str__(self):
+        return self.nomeAnotacao

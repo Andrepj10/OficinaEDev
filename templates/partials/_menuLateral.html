@@ -29,9 +29,7 @@
         <section class="menu-lateral">
             <nav class="menu-lateral__navegacao">
                 <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                <a href="{% url 'anotacoes' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Anotações</a>
-                
-
+              
 
                 
                 <a href="{% url 'eventos' %}" id="eventos-link">
@@ -82,7 +80,27 @@
                         Metas concluídos
                     </a>
                 </div>
+
+                <a href="{% url 'anotacoes' %}" id="anotacoes-link">
+                    <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                    Anotações
+                </a>  
+                <div id="nova-anotacao" style="display: none;">
+                    <a href="{% url 'nova_anotacao' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Criar anotação
+                    </a>
+                </div>  
+                <div id="anotacao-andamento" style="display: none;">
+                    <a href="{% url 'anotacao_andamento' %}">
+                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
+                        Histórico
+                    </a>
+                </div>     
                 
+
+               
+
 
 
 
@@ -99,6 +117,9 @@
 
 
             <script>
+              
+
+                
                 const eventosLink = document.getElementById("eventos-link");
                 const novoEventoDiv = document.getElementById("novo-evento");
                 const eventosAndamentoDiv = document.getElementById("eventos-andamento");
@@ -120,54 +141,71 @@
                   
                 });
 
+                const anotacoesLink = document.getElementById("anotacoes-link");
+                const novaAnotacaoDiv = document.getElementById("nova-anotacao");
+                const anotacaoAndamentoDiv = document.getElementById("anotacao-andamento");
+                
+                let anotacoesVisible = false;
+               
+            
+                anotacoesLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+            
+                    novaAnotacaoDiv.style.display = anotacoesVisible ? "none" : "block";
+                    anotacaoAndamentoDiv.style.display = anotacoesVisible ? "none" : "block";
+                  
+                    anotacoesVisible = !anoacoesVisible;
+                  
+                });
+
                 const metasLink = document.getElementById("metas-link");
-const novaMetaDiv = document.getElementById("nova-meta");
-const metaAndamentoDiv = document.getElementById("meta-andamento");
-const metaConcluidaDiv = document.getElementById("meta-concluida");
+                const novaMetaDiv = document.getElementById("nova-meta");
+                const metaAndamentoDiv = document.getElementById("meta-andamento");
+                const metaConcluidaDiv = document.getElementById("meta-concluida");
 
-let metasVisible = false;
-let metasAndamentoVisible = false;
-let metasConcluidaVisible = false;
+                let metasVisible = false;
+                let metasAndamentoVisible = false;
+                let metasConcluidaVisible = false;
 
-metasLink.addEventListener("click", function(event) {
-    event.preventDefault();
+                metasLink.addEventListener("click", function(event) {
+                    event.preventDefault();
 
-    novaMetaDiv.style.display = metasVisible ? "none" : "block";
-    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
-    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
+                    novaMetaDiv.style.display = metasVisible ? "none" : "block";
+                    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
+                    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
 
-    metasVisible = !metasVisible;
-    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando o link principal é clicado
-    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando o link principal é clicado
-});
+                    metasVisible = !metasVisible;
+                    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando o link principal é clicado
+                    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando o link principal é clicado
+                });
 
-// Repita o processo para os links "Metas em Andamento" e "Metas Concluídas"
-const metaAndamentoLink = document.getElementById("meta-andamento-link");
-const metaConcluidaLink = document.getElementById("meta-concluida-link");
+                // Repita o processo para os links "Metas em Andamento" e "Metas Concluídas"
+                const metaAndamentoLink = document.getElementById("meta-andamento-link");
+                const metaConcluidaLink = document.getElementById("meta-concluida-link");
 
-metaAndamentoLink.addEventListener("click", function(event) {
-    event.preventDefault();
+                metaAndamentoLink.addEventListener("click", function(event) {
+                    event.preventDefault();
 
-    novaMetaDiv.style.display = "none";
-    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
-    metaConcluidaDiv.style.display = "none";
+                    novaMetaDiv.style.display = "none";
+                    metaAndamentoDiv.style.display = metasAndamentoVisible ? "none" : "block";
+                    metaConcluidaDiv.style.display = "none";
 
-    metasVisible = false; // Oculta "Criar Meta" quando "Metas em Andamento" é clicado
-    metasAndamentoVisible = !metasAndamentoVisible;
-    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando "Metas em Andamento" é clicado
-});
+                    metasVisible = false; // Oculta "Criar Meta" quando "Metas em Andamento" é clicado
+                    metasAndamentoVisible = !metasAndamentoVisible;
+                    metasConcluidaVisible = false; // Oculta "Metas Concluídas" quando "Metas em Andamento" é clicado
+                });
 
-metaConcluidaLink.addEventListener("click", function(event) {
-    event.preventDefault();
+                metaConcluidaLink.addEventListener("click", function(event) {
+                    event.preventDefault();
 
-    novaMetaDiv.style.display = "none";
-    metaAndamentoDiv.style.display = "none";
-    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
+                    novaMetaDiv.style.display = "none";
+                    metaAndamentoDiv.style.display = "none";
+                    metaConcluidaDiv.style.display = metasConcluidaVisible ? "none" : "block";
 
-    metasVisible = false; // Oculta "Criar Meta" quando "Metas Concluídas" é clicado
-    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando "Metas Concluídas" é clicado
-    metasConcluidaVisible = !metasConcluidaVisible;
-});
+                    metasVisible = false; // Oculta "Criar Meta" quando "Metas Concluídas" é clicado
+                    metasAndamentoVisible = false; // Oculta "Metas em Andamento" quando "Metas Concluídas" é clicado
+                    metasConcluidaVisible = !metasConcluidaVisible;
+            });
 
             </script>
             

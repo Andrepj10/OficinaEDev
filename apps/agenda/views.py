@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib import messages
 
-from apps.agenda.models import FazerMeta, Fotografia
+from apps.agenda.models import FazerMeta, Fotografia, FazerAnotacao
 from apps.agenda.forms import FotografiaForms
 from apps.agenda.forms import FazerMetaForm
+from apps.agenda.forms import FazerAnotacaoForm
 
 from datetime import datetime
 from django.db.models import Q
@@ -36,13 +37,6 @@ def buscar(request):
             fotografias = fotografias.filter(nome__icontains=nome_a_buscar)
             
     return render (request, "agenda/index.html", {"cards":fotografias})
-
-def anotacoes(request):
-     if not request.user.is_authenticated:
-        messages.error(request, 'Usuário não logado')
-        return redirect('login')
-    
-     return render(request, 'agenda/anotacoes.html')
 
 
 
@@ -247,3 +241,73 @@ def meta_concluida(request):
 
 
     return render(request, 'agenda/meta_concluida.html', {'cards': meta})
+
+
+
+def anotacoes(request):
+     if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+     return render(request, 'agenda/anotacoes.html')
+
+
+def nova_anotacao(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    if request.method == 'POST':
+        form = FazerAnotacaoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = FazerAnotacaoForm()
+    return render(request, 'agenda/nova_anotacao.html', {'form': form})
+
+
+def editar_anotacao(request, anotacao_id):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    anotacao = FazerAnotacao.objects.get(id=anotacao_id)
+    form = FazerAnotacaoForm(instance=anotacao)
+    
+    if request.method == 'POST':
+        form = FazerAnotacaoForm(request.POST, request.FILES, instance=anotacao)
+        if form.is_valid():
+            print(request.POST)
+            form.save()
+            messages.success(request, 'Anotação editada com sucesso')
+            return redirect('index')
+    
+    return render(request, 'agenda/editar_anotacao.html', {'form':form, 'anotacao_id': anotacao_id })
+
+
+
+
+
+def deletar_anotacao(request, anotacao_id):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    anotacao = FazerAnotacao.objects.get(id=anotacao_id)
+    anotacao.delete()
+    messages.success(request, 'Exclusão da anotação feita com sucesso!')
+    return redirect('index')
+
+
+
+def anotacao_andamento(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    
+    anotacao = FazerAnotacao.objects.filter()
+    # Renderiza a lista de fotografias em andamento no template eventos_andamento.html
+    return render(request, 'agenda/anotacao_andamento.html', {'cards': anotacao})
+
