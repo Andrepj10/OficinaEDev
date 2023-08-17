@@ -3,6 +3,7 @@ from django import forms
 from apps.agenda.models import Fotografia
 from apps.agenda.models import FazerMeta
 from apps.agenda.models import FazerAnotacao
+from apps.agenda.models import FazerTarefa
 
 class FotografiaForms(forms.ModelForm):
     class Meta:
@@ -74,4 +75,19 @@ class FazerAnotacaoForm(forms.ModelForm):
             'descricao': forms.Textarea(attrs={'class': 'form-control'}),
             'nomeAnotacao': forms.TextInput(attrs={'class': 'form-control'}),
            
+        }
+
+
+from django import forms
+from .models import FazerTarefa
+
+
+class FazerTarefaForm(forms.ModelForm):
+    class Meta:
+        model = FazerTarefa
+        fields = ['nomeTarefa', 'data_entrega', 'modo']
+        widgets = {
+            'nomeTarefa': forms.TextInput(attrs={'class': 'form-control'}),
+            'data_entrega': forms.DateInput(attrs={'class': 'form-control date-picker', 'type': 'date'}),
+            'modo': forms.Select(attrs={'class': 'form-control'}),
         }

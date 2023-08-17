@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib import messages
 
-from apps.agenda.models import FazerMeta, Fotografia, FazerAnotacao
+from apps.agenda.models import FazerMeta, Fotografia, FazerAnotacao, FazerTarefa
 from apps.agenda.forms import FotografiaForms
 from apps.agenda.forms import FazerMetaForm
 from apps.agenda.forms import FazerAnotacaoForm
+from apps.agenda.forms import FazerTarefaForm
 
 from datetime import datetime
 from django.db.models import Q
@@ -40,13 +41,99 @@ def buscar(request):
 
 
 
-
 def tarefas(request):
     if not request.user.is_authenticated:
         messages.error(request, 'Usuário não logado')
         return redirect('login')
     
     return render(request, 'agenda/tarefas.html')
+
+
+def nova_tarefa(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+    
+    if request.method == 'POST':
+        form = FazerTarefaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = FazerTarefaForm()
+    return render(request, 'agenda/nova_tarefa.html', {'form': form})
+
+
+
+def editar_tarefa(request, tarefa_id):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    tarefa = FazerTarefa.objects.get(id=tarefa_id)
+    form = FazerTarefaForm(instance=tarefa)
+    
+    if request.method == 'POST':
+        form = FazerTarefaForm(request.POST, request.FILES, instance=tarefa)
+        if form.is_valid():
+            print(request.POST)
+            form.save()
+            messages.success(request, 'Tarefa editada com sucesso')
+            return redirect('index')
+    
+    return render(request, 'agenda/editar_tarefa.html', {'form':form, 'tarefa_id': tarefa_id })
+
+
+def tarefa_andamento(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    # Filtra as fotografias em andamento com base no campo "estado"
+    tarefas = FazerTarefa.objects.filter(modo='Tarefa em andamento')
+
+    # Renderiza a lista de fotografias em andamento no template eventos_andamento.html
+    return render(request, 'agenda/tarefa_andamento.html', {'cards': tarefas})
+
+
+
+
+def deletar_tarefa(request, tarefa_id):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    tarefa = FazerTarefa.objects.get(id=tarefa_id)
+    tarefa.delete()
+
+    messages.success(request, 'Deleção da tarefa feita com sucesso!')
+    return redirect('index')
+
+
+def concluir_tarefa(request,tarefa_id):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    tarefa = FazerTarefa.objects.get(id=tarefa_id)
+    tarefa.modo = 'Tarefa Concluida'
+    tarefa.save()
+    messages.success(request, 'Conclusão feita com sucesso!')
+    return redirect('index')
+
+
+def tarefa_concluida(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não logado')
+        return redirect('login')
+
+    # Filtra as fotografias em andamento com base no campo "estado"
+    tarefa = FazerTarefa.objects.filter(modo='Tarefa Concluida')
+
+
+    return render(request, 'agenda/tarefa_concluida.html', {'cards': tarefa})
+
+
 
 
 def eventos(request):

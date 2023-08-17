@@ -6,7 +6,9 @@ from apps.agenda.views import novo_evento, editar_evento, deletar_evento\
     ,filtro, evento_andamento, evento_concluido \
         ,concluir_evento, nova_meta, editar_meta, deletar_meta\
             ,concluir_meta, meta_andamento, meta_concluida\
-                ,nova_anotacao, editar_anotacao, deletar_anotacao, anotacao_andamento
+                ,nova_anotacao, editar_anotacao, deletar_anotacao, anotacao_andamento\
+                    ,nova_tarefa, editar_tarefa, deletar_tarefa, concluir_tarefa, tarefa_andamento, tarefa_concluida\
+
 
 from . import views
 
@@ -14,8 +16,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('imagem/<int:foto_id>', imagem, name='imagem'),
     path("buscar", buscar, name="buscar"),
-    path('tarefas/', views.tarefas, name='tarefas'),
-    
+  
     path('anotacoes/', views.anotacoes, name='anotacoes'),
     path('nova-anotacao', nova_anotacao, name='nova_anotacao'),
     path('editar-anotacao/<int:anotacao_id>/', editar_anotacao, name='editar_anotacao'),
@@ -40,6 +41,13 @@ urlpatterns = [
     path('evento-andamento', evento_andamento, name='evento_andamento'),
     path('evento-concluido', evento_concluido, name='evento_concluido'),
 
+    path('tarefas/', views.tarefas, name='tarefas'),
+    path('nova-tarefa', nova_tarefa, name='nova_tarefa'),
+    path('editar-tarefa/<int:tarefa_id>/', editar_tarefa, name='editar_tarefa'),
+    path('deletar-tarefa/<int:tarefa_id>', deletar_tarefa, name='deletar_tarefa'),
+    path('concluir-tarefa/<int:tarefa_id>', concluir_tarefa, name='concluir_tarefa'),
+    path('tarefa-andamento', tarefa_andamento, name='tarefa_andamento'),
+    path('tarefa-concluida', tarefa_concluida, name='tarefa_concluida'),
 
     
 ]

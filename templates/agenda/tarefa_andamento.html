@@ -1,0 +1,39 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .imagem__titulo,
+    .imagem__descricao {
+        color: white; /* Define a cor do texto como branca */
+    }
+    </style>
+    <section class="conteudo">
+        {% for tarefa in cards %}
+            <section class="imagem">
+                <div class="imagem__conteudo">
+                    <!-- Aqui vem o código para exibir a informação da  tarefa -->
+                    <p class="imagem__titulo">{{ tarefa.nomeTarefa }}</p>
+                    <p class="imagem__descricao">Entrega: {{ tarefa.data_entrega }}</p>
+              
+                    <div>
+                        <a href="{% url 'concluir_tarefa' tarefa.id %}">
+                            <button class="btn btn-success col-12" style="padding: 5px;">Concluir</button>
+                        </a>
+                        <a href="{% url 'editar_tarefa' tarefa.id %}">
+                            <button class="btn btn-success col-12" style="padding: 5px; background-color: #000080; color: white;">Editar</button>
+                        </a>
+                        <a href="{% url 'deletar_tarefa' tarefa.id %}">
+                            <button class="btn btn-danger col-12" style="padding: 5px;">Deletar</button>
+                        </a>
+                        
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </section>
+</main>
+</div>
+{% endblock %}
+
