@@ -57,7 +57,6 @@
                 </div>
                 
                 
-               
                 <a href="{% url 'metas' %}" id="metas-link">
                     <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                     Metas
@@ -85,37 +84,22 @@
                     <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                     Anotações
                 </a>  
-                <div id="nova-anotacao" style="display: none;">
-                    <a href="{% url 'nova_anotacao' %}">
-                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
-                        Criar anotação
-                    </a>
-                </div>  
-                <div id="anotacao-andamento" style="display: none;">
-                    <a href="{% url 'anotacao_andamento' %}">
-                        <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
-                        Histórico
-                    </a>
-                </div>   
                 
-                
-                <a href="{% url 'tarefas' %}" id="tarefas-link">
-                    <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
-                    Tarefas
-                </a>        
                 <div id="nova-tarefa" style="display: none;">
                     <a href="{% url 'nova_tarefa' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Criar Tarefa
                     </a>
                 </div>  
-                <div id="tarefa-andamento" style="display: none;">
+                
+                <div id="tarefas-andamento" style="display: none;">
                     <a href="{% url 'tarefa_andamento' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Tarefas em Andamento
                     </a>
                 </div>                
-                <div id="tarefa-concluida" style="display: none;">
+                
+                <div id="tarefas-concluido" style="display: none;">
                     <a href="{% url 'tarefa_concluida' %}">
                         <img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Tarefas Concluídas
@@ -231,26 +215,27 @@
 
 
 
+                
+                
                 const tarefasLink = document.getElementById("tarefas-link");
                 const novaTarefaDiv = document.getElementById("nova-tarefa");
-              
+                const tarefasAndamentoDiv = document.getElementById("tarefas-andamento");
+                const tarefasConcluidoDiv = document.getElementById("tarefas-concluido");
+               
+                
                 let tarefasVisible = false;
-             
+               
+            
                 tarefasLink.addEventListener("click", function(event) {
                     event.preventDefault();
-
+            
                     novaTarefaDiv.style.display = tarefasVisible ? "none" : "block";
-                   
+                    tarefasAndamentoDiv.style.display = tarefasVisible ? "none" : "block";
+                    tarefasConcluidoDiv.style.display = tarefasVisible ? "none" : "block";
+            
+                  
                     tarefasVisible = !tarefasVisible;
                   
                 });
-
-
-                        
-
-            </script>
-            
-
-
-            
+            </script> 
         </section>
