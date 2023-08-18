@@ -72,14 +72,14 @@ class FazerAnotacao(models.Model):
 
 class FazerTarefa(models.Model):
 
-    OPCOES_MODO = [
+    OPCOES_MOD = [
         ('Tarefa em andamento', 'Tarefa em andamento'),
         ('Tarefa Concluida', 'Tarefa Concluida'),
     ]
     
     nomeTarefa = models.CharField(max_length=100)
     data_entrega = models.DateField(null=False, blank=False)
-    modo = models.CharField(max_length=20, choices=OPCOES_MODO, default='Tarefa em andamento')
+    modo = models.CharField(max_length=20, choices=OPCOES_MOD, default='Tarefa em andamento')
     
     def __str__(self):
         return self.nomeTarefa

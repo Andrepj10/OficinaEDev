@@ -6,4 +6,54 @@
 
 
 </main>
+    <script>
+                const tarefasLink = document.getElementById("tarefas-link");
+                const novaTarefaDiv = document.getElementById("nova-tarefa");
+                const tarefaAndamentoDiv = document.getElementById("tarefa-andamento");
+                const tarefaConcluidoDiv = document.getElementById("tarefa-concluida");
+        
+                let tarefasVisible = false;
+                let tarefasAndamentoVisible = false;
+                let tarefasConcluidaVisible = false;
+        
+                tarefasLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+        
+                    novaTarefaDiv.style.display = tarefasVisible ? "none" : "block";
+                    tarefaAndamentoDiv.style.display = tarefasAndamentoVisible ? "none" : "block";
+                    tarefaConcluidoDiv.style.display = tarefasConcluidaVisible ? "none" : "block";
+        
+                    tarefasVisible = !tarefasVisible;
+                    tarefasAndamentoVisible = false;
+                    tarefasConcluidaVisible = false;
+                });
+        
+                const tarefaAndamentoLink = document.getElementById("tarefa-andamento-link");
+                const tarefaConcluidaLink = document.getElementById("tarefa-concluida-link");
+        
+                tarefaAndamentoLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+        
+                    novaTarefaDiv.style.display = "none";
+                    tarefaAndamentoDiv.style.display = tarefasAndamentoVisible ? "none" : "block";
+                    tarefaConcluidoDiv.style.display = "none";
+        
+                    tarefasVisible = false;
+                    tarefasAndamentoVisible = !tarefasAndamentoVisible;
+                    tarefasConcluidaVisible = false;
+                });
+        
+                tarefaConcluidaLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+        
+                    novaTarefaDiv.style.display = "none";
+                    tarefaAndamentoDiv.style.display = "none";
+                    tarefaConcluidoDiv.style.display = tarefasConcluidaVisible ? "none" : "block";
+        
+                    tarefasVisible = false;
+                    tarefasAndamentoVisible = false;
+                    tarefasConcluidaVisible = !tarefasConcluidaVisible;
+                });
+
+    </script> 
 {% endblock %}
